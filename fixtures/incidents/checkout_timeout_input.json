@@ -1,0 +1,111 @@
+{
+  "case_id": "checkout_timeout_wrong_tool",
+  "schema_version": "traceforge.incident_input.v1",
+  "title": "Checkout API timeouts after release",
+  "source": "synthetic_b2b_payments_support_alert",
+  "customer": {
+    "customer_id": "cust_northstar_supply",
+    "account_tier": "enterprise",
+    "region": "us-east-1"
+  },
+  "alert": {
+    "received_at": "2026-06-12T15:42:00Z",
+    "time_window": {
+      "start": "2026-06-12T14:55:00Z",
+      "end": "2026-06-12T15:40:00Z"
+    },
+    "severity_hint": "high",
+    "message": "Northstar Supply reports that checkout API requests are timing out for card payments after this afternoon's checkout release. Their support team says customers can start checkout but requests hang or return timeout errors before confirmation."
+  },
+  "known_release_context": {
+    "service": "checkout-api",
+    "release_version": "checkout-api@2026.06.12",
+    "deployed_at": "2026-06-12T14:50:00Z",
+    "change_summary": "Checkout request routing and payment confirmation timeout handling changed in the afternoon release."
+  },
+  "workflow": {
+    "steps": [
+      {
+        "step_index": 1,
+        "step_name": "intake_route",
+        "purpose": "Normalize the support alert and select the first diagnostic tool.",
+        "allowed_tools": [
+          "service_metrics_lookup",
+          "deploy_changelog_lookup",
+          "billing_ledger_lookup",
+          "runbook_search"
+        ]
+      },
+      {
+        "step_index": 2,
+        "step_name": "collect_evidence",
+        "purpose": "Collect evidence using the selected diagnostic tool through mocked replay fixtures."
+      },
+      {
+        "step_index": 3,
+        "step_name": "classify_incident",
+        "purpose": "Classify the incident and produce the customer-safe and engineering response plan."
+      }
+    ]
+  },
+  "expected_cases": {
+    "baseline": {
+      "prompt_version": "triage_route_prompt:v1",
+      "route_fixture": "fixtures/model_outputs/baseline_good_route.json",
+      "tool_fixture": "fixtures/tool_outputs/service_metrics_lookup_checkout_latency.json",
+      "classification_fixture": "fixtures/model_outputs/baseline_good_classification.json",
+      "protected_expectations": {
+        "requested_tool": "service_metrics_lookup",
+        "diagnostic_route": "service_health",
+        "evidence_family": "service_telemetry",
+        "incident_type": "service_regression_after_deploy",
+        "severity": "high",
+        "escalation_required": true
+      }
+    },
+    "incident": {
+      "prompt_version": "triage_route_prompt:v2_bad",
+      "route_fixture": "fixtures/model_outputs/bad_prompt_route.json",
+      "tool_fixture": "fixtures/tool_outputs/billing_ledger_lookup_healthy.json",
+      "classification_fixture": "fixtures/model_outputs/bad_prompt_classification.json",
+      "protected_expectations": {
+        "requested_tool": "billing_ledger_lookup",
+        "diagnostic_route": "billing_account_review",
+        "evidence_family": "billing_ledger",
+        "incident_type": "account_billing_configuration_issue",
+        "severity": "medium",
+        "escalation_required": false
+      }
+    },
+    "patched": {
+      "prompt_version": "triage_route_prompt:v3_patch",
+      "route_fixture": "fixtures/model_outputs/patched_prompt_route.json",
+      "tool_fixture": "fixtures/tool_outputs/service_metrics_lookup_checkout_latency.json",
+      "classification_fixture": "fixtures/model_outputs/patched_prompt_classification.json",
+      "protected_expectations": {
+        "requested_tool": "service_metrics_lookup",
+        "diagnostic_route": "service_health",
+        "evidence_family": "service_telemetry",
+        "incident_type": "service_regression_after_deploy",
+        "severity": "high",
+        "escalation_required": true
+      }
+    }
+  },
+  "first_divergence_contract": {
+    "baseline_case": "baseline",
+    "candidate_case": "incident",
+    "step_index": 1,
+    "step_name": "intake_route",
+    "field_path": "step_1.output.requested_tool",
+    "baseline_value": "service_metrics_lookup",
+    "candidate_value": "billing_ledger_lookup",
+    "divergence_label": "tool_selection_changed",
+    "divergence_severity": "blocking"
+  },
+  "notes": [
+    "This fixture defines the incident input and expected case contracts only.",
+    "It is not a generated trace, replay comparison, or completed report.",
+    "Regression replay must use cached model fixtures and mocked tool fixtures."
+  ]
+}

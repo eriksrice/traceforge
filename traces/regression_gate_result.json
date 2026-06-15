@@ -1,0 +1,20 @@
+{
+  "blocking_reasons": [],
+  "checked_reports": [
+    "reports/first_divergence_report.md",
+    "reports/incident_timeline.md",
+    "reports/regression_gate_report.md"
+  ],
+  "checked_traces": [
+    "traces/baseline_good.jsonl",
+    "traces/incident_bad.jsonl",
+    "traces/patched_good.jsonl",
+    "traces/replay_baseline_vs_incident.json",
+    "traces/replay_baseline_vs_patched.json"
+  ],
+  "gate_name": "traceforge-seeded-regression",
+  "gate_status": "pass",
+  "incident_id": "checkout_timeout_wrong_tool",
+  "notes": "Bad run fails for expected first divergence; patched run must match baseline protected fields.",
+  "review_required": false
+}

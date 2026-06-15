@@ -1,0 +1,31 @@
+{
+  "fixture_id": "patched_prompt_route",
+  "fixture_version": "v1",
+  "fixture_type": "model_output",
+  "case_id": "checkout_timeout_wrong_tool",
+  "step_index": 1,
+  "step_name": "intake_route",
+  "prompt_id": "triage_route_prompt",
+  "prompt_version": "triage_route_prompt:v3_patch",
+  "model_provider": "synthetic",
+  "model_name": "traceforge-synthetic-router",
+  "model_version": "v1",
+  "model_output_mode": "cached",
+  "input_ref": "fixtures/incidents/checkout_timeout_input.json",
+  "output": {
+    "customer_id": "cust_northstar_supply",
+    "affected_service": "checkout-api",
+    "symptom": "checkout API requests hang or return timeout errors before confirmation",
+    "time_window": {
+      "start": "2026-06-12T14:55:00Z",
+      "end": "2026-06-12T15:40:00Z"
+    },
+    "severity_hint": "high",
+    "diagnostic_route": "service_health",
+    "requested_tool": "service_metrics_lookup",
+    "state_flags": {
+      "deployment_evidence_needed": true,
+      "billing_evidence_needed": false
+    }
+  }
+}

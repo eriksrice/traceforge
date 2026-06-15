@@ -1,0 +1,162 @@
+{
+  "artifact_type": "traceforge.replay_comparison.v1",
+  "baseline_run_id": "baseline_good",
+  "baseline_trace_id": "trace_checkout_timeout_baseline_good",
+  "candidate_run_id": "patched_good",
+  "candidate_trace_id": "trace_checkout_timeout_patched_good",
+  "comparisons": [
+    {
+      "baseline_value": "service_metrics_lookup",
+      "candidate_value": "service_metrics_lookup",
+      "divergence_label": "none",
+      "divergence_severity": "none",
+      "downstream_of": null,
+      "field_path": "step_1.output.requested_tool",
+      "first_divergence": false,
+      "matched": true,
+      "note": ""
+    },
+    {
+      "baseline_value": "service_health",
+      "candidate_value": "service_health",
+      "divergence_label": "none",
+      "divergence_severity": "none",
+      "downstream_of": null,
+      "field_path": "step_1.output.diagnostic_route",
+      "first_divergence": false,
+      "matched": true,
+      "note": ""
+    },
+    {
+      "baseline_value": "route_selected",
+      "candidate_value": "route_selected",
+      "divergence_label": "none",
+      "divergence_severity": "none",
+      "downstream_of": null,
+      "field_path": "step_1.state.transition_label",
+      "first_divergence": false,
+      "matched": true,
+      "note": ""
+    },
+    {
+      "baseline_value": "service_metrics_lookup",
+      "candidate_value": "service_metrics_lookup",
+      "divergence_label": "none",
+      "divergence_severity": "none",
+      "downstream_of": null,
+      "field_path": "step_2.tool_name",
+      "first_divergence": false,
+      "matched": true,
+      "note": ""
+    },
+    {
+      "baseline_value": "service_telemetry",
+      "candidate_value": "service_telemetry",
+      "divergence_label": "none",
+      "divergence_severity": "none",
+      "downstream_of": null,
+      "field_path": "step_2.output.evidence_family",
+      "first_divergence": false,
+      "matched": true,
+      "note": ""
+    },
+    {
+      "baseline_value": "evidence_collected",
+      "candidate_value": "evidence_collected",
+      "divergence_label": "none",
+      "divergence_severity": "none",
+      "downstream_of": null,
+      "field_path": "step_2.state.transition_label",
+      "first_divergence": false,
+      "matched": true,
+      "note": ""
+    },
+    {
+      "baseline_value": "service_regression_after_deploy",
+      "candidate_value": "service_regression_after_deploy",
+      "divergence_label": "none",
+      "divergence_severity": "none",
+      "downstream_of": null,
+      "field_path": "step_3.output.incident_type",
+      "first_divergence": false,
+      "matched": true,
+      "note": ""
+    },
+    {
+      "baseline_value": "high",
+      "candidate_value": "high",
+      "divergence_label": "none",
+      "divergence_severity": "none",
+      "downstream_of": null,
+      "field_path": "step_3.output.severity",
+      "first_divergence": false,
+      "matched": true,
+      "note": ""
+    },
+    {
+      "baseline_value": "Rollback or mitigate checkout-api@2026.06.12 and monitor p95 latency plus 5xx rate.",
+      "candidate_value": "Rollback or mitigate checkout-api@2026.06.12 and monitor p95 latency plus 5xx rate.",
+      "divergence_label": "none",
+      "divergence_severity": "none",
+      "downstream_of": null,
+      "field_path": "step_3.output.engineering_next_action",
+      "first_divergence": false,
+      "matched": true,
+      "note": ""
+    },
+    {
+      "baseline_value": true,
+      "candidate_value": true,
+      "divergence_label": "none",
+      "divergence_severity": "none",
+      "downstream_of": null,
+      "field_path": "step_3.output.escalation_required",
+      "first_divergence": false,
+      "matched": true,
+      "note": ""
+    },
+    {
+      "baseline_value": "incident_classified",
+      "candidate_value": "incident_classified",
+      "divergence_label": "none",
+      "divergence_severity": "none",
+      "downstream_of": null,
+      "field_path": "step_3.state.transition_label",
+      "first_divergence": false,
+      "matched": true,
+      "note": ""
+    },
+    {
+      "baseline_value": true,
+      "candidate_value": true,
+      "divergence_label": "none",
+      "divergence_severity": "none",
+      "downstream_of": null,
+      "field_path": "trace.schema_valid",
+      "first_divergence": false,
+      "matched": true,
+      "note": ""
+    }
+  ],
+  "determinism_class": "deterministic",
+  "first_divergence_field": null,
+  "first_divergence_step_index": null,
+  "protected_field_order": [
+    "step_1.output.requested_tool",
+    "step_1.output.diagnostic_route",
+    "step_1.state.transition_label",
+    "step_2.tool_name",
+    "step_2.output.evidence_family",
+    "step_2.state.transition_label",
+    "step_3.output.incident_type",
+    "step_3.output.severity",
+    "step_3.output.engineering_next_action",
+    "step_3.output.escalation_required",
+    "step_3.state.transition_label",
+    "trace.schema_valid"
+  ],
+  "replay_mode": "patched",
+  "replay_status": "matched",
+  "root_divergence_event_id": null,
+  "root_divergence_label": "none"
+}

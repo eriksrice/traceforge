@@ -1,0 +1,28 @@
+{
+  "fixture_id": "billing_ledger_lookup_healthy",
+  "fixture_version": "v1",
+  "fixture_type": "tool_output",
+  "case_id": "checkout_timeout_wrong_tool",
+  "tool_name": "billing_ledger_lookup",
+  "tool_version": "v1",
+  "tool_replay_mode": "mocked",
+  "tool_status": "success",
+  "latency_ms": 141,
+  "input": {
+    "customer_id": "cust_northstar_supply",
+    "time_window": {
+      "start": "2026-06-12T14:55:00Z",
+      "end": "2026-06-12T15:40:00Z"
+    }
+  },
+  "output": {
+    "evidence_family": "billing_ledger",
+    "status": "success",
+    "ledger_status": "healthy",
+    "payment_disputes": 0,
+    "invoice_anomalies": 0,
+    "account_status": "normal",
+    "recent_payment_failures": 0,
+    "observed_at": "2026-06-12T15:39:00Z"
+  }
+}

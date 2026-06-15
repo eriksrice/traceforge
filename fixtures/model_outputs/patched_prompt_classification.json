@@ -1,0 +1,29 @@
+{
+  "fixture_id": "patched_prompt_classification",
+  "fixture_version": "v1",
+  "fixture_type": "model_output",
+  "case_id": "checkout_timeout_wrong_tool",
+  "step_index": 3,
+  "step_name": "classify_incident",
+  "prompt_id": "incident_classification_prompt",
+  "prompt_version": "incident_classification_prompt:v3_patch",
+  "model_provider": "synthetic",
+  "model_name": "traceforge-synthetic-classifier",
+  "model_version": "v1",
+  "model_output_mode": "cached",
+  "input_ref": "fixtures/tool_outputs/service_metrics_lookup_checkout_latency.json",
+  "output": {
+    "incident_type": "service_regression_after_deploy",
+    "suspected_root_cause": "checkout-api@2026.06.12 introduced elevated latency and timeout errors in us-east-1",
+    "severity": "high",
+    "evidence_used": [
+      "checkout API p95 latency spike",
+      "5xx increase after checkout-api@2026.06.12",
+      "correlated timeout errors in us-east-1"
+    ],
+    "customer_safe_summary": "Checkout requests are timing out after a recent service release; engineering is mitigating the service regression.",
+    "engineering_next_action": "Rollback or mitigate checkout-api@2026.06.12 and monitor p95 latency plus 5xx rate.",
+    "confidence": 0.9,
+    "escalation_required": true
+  }
+}

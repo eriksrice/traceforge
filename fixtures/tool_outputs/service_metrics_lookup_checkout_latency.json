@@ -1,0 +1,40 @@
+{
+  "fixture_id": "service_metrics_lookup_checkout_latency",
+  "fixture_version": "v1",
+  "fixture_type": "tool_output",
+  "case_id": "checkout_timeout_wrong_tool",
+  "tool_name": "service_metrics_lookup",
+  "tool_version": "v1",
+  "tool_replay_mode": "mocked",
+  "tool_status": "success",
+  "latency_ms": 184,
+  "input": {
+    "customer_id": "cust_northstar_supply",
+    "service": "checkout-api",
+    "region": "us-east-1",
+    "time_window": {
+      "start": "2026-06-12T14:55:00Z",
+      "end": "2026-06-12T15:40:00Z"
+    }
+  },
+  "output": {
+    "evidence_family": "service_telemetry",
+    "status": "success",
+    "region": "us-east-1",
+    "service": "checkout-api",
+    "p95_latency_ms": {
+      "baseline": 220,
+      "observed": 1820
+    },
+    "http_5xx_rate": {
+      "baseline": 0.004,
+      "observed": 0.087
+    },
+    "deployment_version": "checkout-api@2026.06.12",
+    "correlated_errors": [
+      "payment_confirmation_timeout",
+      "checkout_request_deadline_exceeded"
+    ],
+    "observed_at": "2026-06-12T15:39:00Z"
+  }
+}
