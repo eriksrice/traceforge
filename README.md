@@ -1,5 +1,7 @@
 # TraceForge
 
+[![TraceForge CI](https://github.com/eriksrice/traceforge/actions/workflows/ci.yml/badge.svg)](https://github.com/eriksrice/traceforge/actions/workflows/ci.yml)
+
 TraceForge is a file-backed incident replay system for LLM/tool pipelines. It captures typed traces, replays seeded incidents deterministically, detects the first divergent step, and turns the fix into a CI-style regression gate.
 
 ## Problem
@@ -19,6 +21,12 @@ The project is built to show production AI reliability work:
 - Incident reconstruction from append-only artifacts.
 - Release gating for prompt, model, and tool behavior changes.
 
+Resume-ready summary:
+
+- Built a deterministic replay harness for LLM/tool pipeline incidents using typed trace events, mocked tool contracts, and protected-field comparison.
+- Implemented first-divergence classification that separates root tool-selection failures from downstream evidence and state changes.
+- Converted a seeded incident and patched fix into a CI-backed regression gate with reproducible trace and report artifacts.
+
 ## V1 Scope
 
 - One 3-step incident triage workflow.
@@ -33,6 +41,16 @@ The project is built to show production AI reliability work:
 No dashboard, LangGraph integration, live provider calls, vector database, external service, or broad agent platform is included in v1.
 
 ## Architecture
+
+```mermaid
+flowchart LR
+    A["Incident input fixture"] --> B["3-step workflow"]
+    B --> C["Append-only typed trace"]
+    C --> D["Replay comparison"]
+    D --> E["First-divergence classifier"]
+    E --> F["Trace-derived report packet"]
+    F --> G["CI-style regression gate"]
+```
 
 ```text
 fixtures/          cached model outputs, mocked tool responses, incident input
@@ -58,6 +76,15 @@ Core modules:
 Typer is used because the CLI has typed options and small subcommands without needing a larger framework.
 
 ## Demo
+
+Reviewer fast path:
+
+```bash
+git clone https://github.com/eriksrice/traceforge.git
+cd traceforge
+python -m pip install -e ".[dev]"
+./scripts/demo.sh
+```
 
 Install dependencies:
 
@@ -112,6 +139,8 @@ Report artifacts:
 
 These are produced by code and can be regenerated with `python -m traceforge gate`. The first-divergence and timeline reports can also be regenerated directly with `python -m traceforge report ...`.
 
+For a reviewer narrative, see [docs/case_study.md](docs/case_study.md). For the AI Analytics Engineer angle, see [docs/analytics_view.md](docs/analytics_view.md).
+
 ## Evaluation Strategy
 
 The seeded regression gate passes only when:
@@ -126,7 +155,7 @@ The seeded regression gate passes only when:
 
 ## Current Status
 
-Phase 7.5 complete. The project has the reproducible v1 path, generated artifacts, tests, report commands, gate command, and demo script.
+Phase 8 complete. The project has the reproducible v1 path, generated artifacts, tests, report commands, gate command, demo script, CI workflow, and reviewer case study.
 
 ## Limitations
 
@@ -142,4 +171,3 @@ Phase 7.5 complete. The project has the reproducible v1 path, generated artifact
 - Add optional live-provider exploratory mode outside the regression gate.
 - Add multiple workflow topologies and incident types.
 - Add richer determinism statistics.
-- Add external CI integration.
